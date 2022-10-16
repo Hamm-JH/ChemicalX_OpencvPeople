@@ -6,6 +6,7 @@ import requests
 import cv2
 import pyrealsense2
 from realsense_depth import *
+from PublicSetting import PublicSetting as SET
 
 dc = DepthCamera()
 XPPerD = 0.1359375  # 픽셀당 x 각도
@@ -183,7 +184,9 @@ def OnDetect(image, list : list[str], camIndex : str):
 
         # print(f'label {label}, values {lVal}')
 
-        if label == '0':  # 사람
+
+
+        if label == SET.labelTarget.value:  # 사람 또는 리모컨
         # if label == '65':   # 리모컨 (데모용)
             # print(f'label {label}, values {lVal}')
             depth = depth_frame[int(lVal[0]), int(lVal[1])]
@@ -193,7 +196,9 @@ def OnDetect(image, list : list[str], camIndex : str):
 
             peoples.append(people)
 
-    if len(peoples) >= 2:
+    # print(len(peoples))
+
+    if len(peoples) >= SET.DetectingCount.value:
         realVector = []
 
         # 근처 두명 추려내기 (캠 기준)
@@ -274,9 +279,9 @@ def OnDetect(image, list : list[str], camIndex : str):
 
         headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
         # params=
-        res = requests.get(url='http://192.168.10.11:3002/VISION', json=data, headers=headers)
+        res = requests.get(url=SET.serverUrl.value , json=data, headers=headers)
 
-        time.sleep(0.3)
+        time.sleep( SET.requestInterval.value )
 
     # cv2.circle(image, (320, 240), 15, (255, 0, 255), -1)
 
