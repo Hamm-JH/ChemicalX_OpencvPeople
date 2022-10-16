@@ -166,6 +166,12 @@ def run(
                         xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh
                         line = (cls, *xywh, conf) if save_conf else (cls, *xywh)  # label format
 
+                        # dc = DepthCamera()
+                        # ret, depth_frame, color_frame = dc.get_frame()
+                        #
+                        # cDep = depth_frame[320, 240]
+                        # print(f'distance {cDep}')
+
                         # print(imgsz)
                         # print(line)
                         value = ('%g ' * len(line)).rstrip() % line
