@@ -1,14 +1,18 @@
 import cv2
 import threading
 
+import detect
+
+
 class camThread(threading.Thread):
     def __init__(self, previewName, camID):
         threading.Thread.__init__(self)
         self.previewName = previewName
         self.camID = camID
     def run(self):
-        print("Starting " + self.previewName)
-        camPreview(self.previewName, self.camID)
+        # print("Starting " + self.previewName)
+        detect.run(source=self.camID, save_txt=True)
+        # camPreview(self.previewName, self.camID)
 
 def camPreview(previewName, camID):
     cv2.namedWindow(previewName)
@@ -36,6 +40,7 @@ def Run():
 def CamRun(name, index):
     thread = camThread(name, index)
     thread.start()
+    return thread
 
 if __name__ == "__main__":
     Run()
