@@ -153,6 +153,8 @@ def OnDetect(image, list : list[str], camIndex : str):
     imgsz = (640, 480) # :: tuple
     cPx = (320, 240)
 
+    print(f'cam index : {camIndex}')
+
     # print(f'list : {type(list)}, {list}')
     # print(f'cam index {type(camIndex)}, {camIndex}') # '0', '2'
     # print(f'img size : {type(imgsz)}, {imgsz}')   # (640, 480)
@@ -181,8 +183,8 @@ def OnDetect(image, list : list[str], camIndex : str):
 
         # print(f'label {label}, values {lVal}')
 
-        # if label == '0':  # 사람
-        if label == '65':   # 리모컨 (데모용)
+        if label == '0':  # 사람
+        # if label == '65':   # 리모컨 (데모용)
             # print(f'label {label}, values {lVal}')
             depth = depth_frame[int(lVal[0]), int(lVal[1])]
             center = (int(lVal[0]), int(lVal[1]))
@@ -274,7 +276,7 @@ def OnDetect(image, list : list[str], camIndex : str):
         # params=
         res = requests.get(url='http://192.168.10.11:3002/VISION', json=data, headers=headers)
 
-        time.sleep(0.1)
+        time.sleep(0.3)
 
     # cv2.circle(image, (320, 240), 15, (255, 0, 255), -1)
 
