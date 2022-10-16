@@ -1,16 +1,12 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
+import MultiCamera
+import detect
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    """ Main """
+    # MultiCamera.Run()
+    # MultiCamera.CamRun("camera1", 0)
+    # MultiCamera.CamRun("camera2", 2)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    # 단일 카메라에서 디텍팅 먼저
+    detect.run(source=0, save_txt=True)
